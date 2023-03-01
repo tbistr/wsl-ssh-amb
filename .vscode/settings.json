@@ -1,0 +1,21 @@
+{
+    // terminal settings
+    "terminal.integrated.profiles.linux": {
+        "fish": {
+            "path": "fish"
+        },
+        "bash": {
+            "path": "bash",
+            "icon": "terminal-bash"
+        }
+    },
+    "terminal.integrated.defaultProfile.linux": "fish",
+    "editor.formatOnSave": true,
+    // "go.inlayHints.assignVariableTypes": false,
+    // "go.inlayHints.compositeLiteralFields": true,
+    // "go.inlayHints.compositeLiteralTypes": true,
+    // "go.inlayHints.constantValues": true,
+    // "go.inlayHints.functionTypeParameters": true,
+    // "go.inlayHints.parameterNames": true,
+    // "go.inlayHints.rangeVariableTypes": true,
+}
