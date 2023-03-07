@@ -15,7 +15,8 @@ func main() {
 	args := append([]string{}, os.Args[1:]...)
 	var c *exec.Cmd
 
-	dest := 0
+	// Detect a SSH target arg position.
+	dest := -1
 	for i := 0; i < len(args); i++ {
 		a := args[i]
 		if strings.HasPrefix(a, "-") {
@@ -31,17 +32,19 @@ func main() {
 		}
 	}
 
-	if strings.HasPrefix(args[dest], TARGET_PREFIX) {
+	if dest != -1 && // os.Args have some SSH target.
+		strings.HasPrefix(args[dest], TARGET_PREFIX) {
 		args[dest] = strings.TrimPrefix(args[dest], TARGET_PREFIX)
-		// [-F path] is configFilepath opt.
+		// [-F path] pair is a configFilepath opt.
 		// Remove because it is a Windows path expression.
 		for i := 0; i < len(args); i++ {
 			if args[i] == "-F" {
 				args = append(args[0:i], args[i+2:]...)
+				break
 			}
 		}
 		c = exec.Command("wsl", append([]string{"ssh"}, args...)...)
-	} else {
+	} else { // os.Args must be only options.
 		c = exec.Command("ssh", args...)
 	}
 
